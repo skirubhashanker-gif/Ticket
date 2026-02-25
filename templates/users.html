@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Manage Users</h2>
+<form method="post">
+  <label>Username</label>
+  <input name="username" required />
+  <label>Password</label>
+  <input type="password" name="password" required />
+  <label>Role</label>
+  <select name="role" required>
+    <option value="user">User</option>
+    <option value="tech">Tech</option>
+    <option value="admin">Admin</option>
+  </select>
+  <button type="submit">Create Account</button>
+</form>
+
+<table class="table">
+  <thead><tr><th>ID</th><th>Username</th><th>Role</th><th>Created</th></tr></thead>
+  <tbody>
+    {% for u in users %}
+    <tr><td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.role }}</td><td>{{ u.created_at }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

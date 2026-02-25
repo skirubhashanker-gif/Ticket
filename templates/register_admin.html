@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Setup Admin Account</h2>
+<p>Create the first admin account to start using the ticket system.</p>
+<form method="post">
+  <label>Admin Username</label>
+  <input name="username" required />
+  <label>Password</label>
+  <input type="password" name="password" required />
+  <button type="submit">Create Admin</button>
+</form>
+{% endblock %}
