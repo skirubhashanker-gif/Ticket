@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="cards">
+  <div class="card"><h4>Total Users</h4><p>{{ stats.users }}</p></div>
+  <div class="card"><h4>Total Tickets</h4><p>{{ stats.tickets }}</p></div>
+  <div class="card"><h4>Open Tickets</h4><p>{{ stats.open_tickets }}</p></div>
+  <div class="card"><h4>Closed/Resolved</h4><p>{{ stats.closed_tickets }}</p></div>
+</div>
+<p>Use <a href="{{ url_for('manage_users') }}">Manage Users</a> to create users and tech team members.</p>
+{% endblock %}
