@@ -1,0 +1,1 @@
+export default function Page(){return <section className="card"><h1 className="text-2xl font-bold capitalize">dashboard</h1><p className="mt-2 text-slate-600">Production Supabase-backed dashboard workspace.</p></section>}

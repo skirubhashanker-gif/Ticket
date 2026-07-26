@@ -1,0 +1,23 @@
+{
+  "name": "purchase-requisition-system",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm -w apps/web run dev",
+    "build": "npm -w apps/web run build",
+    "lint": "npm -w apps/web run lint",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "check:deploy": "./scripts/check-deployment-access.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
