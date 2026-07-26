@@ -1,0 +1,2 @@
+import { describe, expect, it } from 'vitest'; import { calculateLine, nextStatus } from './index';
+describe('workflow',()=>{ it('validates approval path',()=>{ expect(nextStatus('DRAFT','SUBMIT')).toBe('PENDING_APPROVAL_L1'); expect(nextStatus('PENDING_APPROVAL_L1','APPROVE',2)).toBe('PENDING_APPROVAL_L2'); expect(nextStatus('PENDING_APPROVAL_L2','APPROVE',2)).toBe('APPROVED'); }); it('calculates line totals',()=>{ expect(calculateLine(2,100,10,5)).toBe(210); }); });

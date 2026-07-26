@@ -1,0 +1,3 @@
+import { NextResponse } from 'next/server'; import { PurchaseRepository, serviceClient } from '@prs/database';
+export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){ try{return NextResponse.json(await new PurchaseRepository(serviceClient()).get((await params).id));}catch(e){return NextResponse.json({error:e instanceof Error?e.message:'Not found'},{status:404});}}
+export async function PUT(req:Request,{params}:{params:Promise<{id:string}>}){ const body=await req.json(); const db=serviceClient(); const {data,error}=await db.from('purchase_headers').update(body).eq('id',(await params).id).select().single(); return error?NextResponse.json({error:error.message},{status:400}):NextResponse.json(data);}

@@ -1,0 +1,13 @@
+import { z } from 'zod';
+export const Status = z.enum(['DRAFT','PENDING_APPROVAL_L1','PENDING_APPROVAL_L2','PENDING_APPROVAL_L3','CLARIFICATION_REQUIRED','APPROVED','REJECTED','CANCELLED']);
+export type PurchaseStatus = z.infer<typeof Status>;
+export const Action = z.enum(['CREATE','SUBMIT','APPROVE','REJECT','REQUEST_CLARIFICATION','RESUBMIT','CANCEL','UPDATE']);
+export type ApprovalAction = z.infer<typeof Action>;
+export const lineItemSchema = z.object({ id:z.string().uuid().optional(), line_no:z.number().int().min(1).max(100), item_description:z.string().min(2), specification:z.string().optional().default(''), qty:z.number().positive(), uom:z.string().min(1), estimated_price:z.number().nonnegative(), tax_percent:z.number().min(0).max(100).default(0), discount_percent:z.number().min(0).max(100).default(0), total_amount:z.number().nonnegative(), remarks:z.string().optional().default('') });
+export const purchaseHeaderSchema = z.object({ department:z.string().min(1), cost_center:z.string().min(1), required_date:z.string().min(1), vendor_name:z.string().min(1), currency:z.string().length(3).default('USD'), remarks:z.string().optional().default(''), clarification_comments:z.string().optional().nullable(), line_items:z.array(lineItemSchema).min(1).max(100) });
+export type PurchaseInput = z.infer<typeof purchaseHeaderSchema>;
+export type PurchaseHeader = Omit<PurchaseInput,'line_items'> & { id:string; pr_number:string; requester_id:string; requester_email:string; status:PurchaseStatus; current_level:number; created_at:string; updated_at:string; submitted_at:string|null; approved_at:string|null; cancelled_at:string|null };
+export type PurchaseLineItem = z.infer<typeof lineItemSchema> & { id:string; header_id:string };
+export type ApprovalLog = { id:string; header_id:string; level:number; action:ApprovalAction; previous_status:PurchaseStatus|null; new_status:PurchaseStatus; approver_email:string|null; comments:string|null; timestamp:string; ip_address:string|null; user_agent:string|null };
+export type ApprovalMatrixRow = { id:string; department:string; min_amount:number; max_amount:number; approval_level:number; approver_email:string; sequence:number };
+export type ApprovalTokenPayload = { prId:string; approverEmail:string; level:number; action:'approve'|'reject'|'clarification'; jti:string; exp:number };

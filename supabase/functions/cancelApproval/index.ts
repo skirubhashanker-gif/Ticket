@@ -1,0 +1,2 @@
+import { db, json } from '../_shared/index.ts';
+Deno.serve(async (req)=>{ if(req.method==='OPTIONS') return json({ok:true}); const body=await req.json().catch(()=>({})); const client=db(); await client.from('approval_logs').insert({header_id:body.header_id,level:body.level??0,action:body.action??'UPDATE',previous_status:body.previous_status??null,new_status:body.new_status??'DRAFT',approver_email:body.approver_email??null,comments:body.comments??null,user_agent:req.headers.get('user-agent')}); return json({ok:true,function:new URL(req.url).pathname}); });

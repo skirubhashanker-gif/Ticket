@@ -1,0 +1,2 @@
+import './globals.css'; import Link from 'next/link';
+export default function RootLayout({children}:{children:React.ReactNode}){ const links=['dashboard','my-requests','new-request','approval-inbox','approval-history','administration']; return <html lang="en"><body><nav className="no-print border-b bg-white"><div className="mx-auto flex max-w-7xl gap-4 p-4"><b>PR Approval</b>{links.map(l=><Link key={l} className="text-sm text-slate-600" href={`/${l}`}>{l.replace('-',' ')}</Link>)}</div></nav><main className="mx-auto max-w-7xl p-6">{children}</main></body></html> }
