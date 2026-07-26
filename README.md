@@ -17,4 +17,4 @@ Production-ready monorepo for purchase requisitions, committee approval, email a
 - `supabase/migrations` PostgreSQL schema, functions, RLS.
 - `supabase/functions` Edge Functions.
 
-See `docs/architecture.md`, `docs/er-diagram.md`, `docs/workflow.md`, `docs/testing.md`, `docs/deployment.md`, `docs/github-deployment.md`, and `docs/supabase-setup.md`.
+See `docs/architecture.md`, `docs/er-diagram.md`, `docs/workflow.md`, `docs/testing.md`, `docs/deployment.md`, `docs/github-deployment.md`, `docs/final-test-handoff.md`, and `docs/supabase-setup.md`.
